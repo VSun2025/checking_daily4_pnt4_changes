@@ -10,15 +10,18 @@ SELECT
     CASE WHEN CHARINDEX('TANKLESS', part_num_contract) > 0 THEN 'NEW TANKLESS' ELSE 'NEW WATER HEATER' END AS Product,
     [Itm Cd],
     SKU,
-    '50' AS PymtAmt,
-    'ChargedUp Spiff Payment' AS PymtType,
+    '200' AS PymtAmt,
+    'ChargedUp Points Payment' AS PymtType,
     '81' AS [Patch Code],
     [SO Ref],
     [Customer Address],
     [Postal Cd],
     0 AS keep
-FROM [pbi].[mi_new_wh_weekly_new_test]
+FROM [pbi].[mi_new_wh_weekly_new]
 WHERE 
-    [Operations Group] IN ('CA', 'ELECTR', 'HIM', 'PLUMB')
-    AND [Job Title] IN ('Cleaner', 'Helpers', 'HIM', 'Installers', 'Service Technician')
-    AND SUBSTRING([Login Name Ref], LEN([Login Name Ref]), 1) NOT IN ('5', '9')
+    [Job Title] IN ('Admin. Assistant', 'Billing Operations', 'Business Analyst', 'CCA', 'Charged Up (Non-Access)', 'Claims',
+        'Contract Processing', 'District Manager', 'EST', 'Field Manager', 'Finance', 'Home Services Ops', 'Install Clerk', 'Install Planning', 'IT', 'M&L', 'Marketing', 'Ops Support Clerk',
+        'Process Analyst', 'Reconciliation', 'Sales Support Clerk', 'Service Clerical', 'Service Clerk', 'Service Planning', 'Super Office Admin', 'Tech Desk', 'Tech Desk Supervisor', 'Workload Planning')
+    AND [CSR Workgroup] = 'Sales Support Clerk'
+    AND [Employee ID] <> 'SSUPPORT'
+    AND CASE WHEN ([Login Name Ref] != CSRId) THEN 1 ELSE 0 END = 1
