@@ -17,7 +17,7 @@ SELECT
     [Customer Address],
     [Postal Cd],
     0 AS keep
-FROM [pbi].[mi_new_wh_weekly_new_test]
+FROM [pbi].[mi_new_wh_weekly_new]
 WHERE 
     [Job Title] IN ('Admin. Assistant', 'Billing Operations', 'Business Analyst', 'CCA', 'Charged Up (Non-Access)', 'Claims',
         'Contract Processing', 'District Manager', 'EST', 'Field Manager', 'Finance', 'Home Services Ops', 'Install Clerk', 'Install Planning', 'IT', 'M&L', 'Marketing', 'Ops Support Clerk',
