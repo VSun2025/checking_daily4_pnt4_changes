@@ -1,0 +1,24 @@
+SELECT 
+    [Employee ID],
+    [First Name],
+    [Last Name],
+    [Job Title],
+    [Reference ID],
+    CONVERT(varchar(10), TRY_CAST([Creation Date] AS DATETIME), 120) AS [Creation Date],
+    CONVERT(varchar(10), TRY_CAST([Written Date] AS DATETIME), 120) AS [Written Date],
+    CONVERT(varchar(10), TRY_CAST([Final Date] AS DATETIME), 120) AS [Final Date],
+    CASE WHEN CHARINDEX('TANKLESS', part_num_contract) > 0 THEN 'NEW TANKLESS' ELSE 'NEW WATER HEATER' END AS Product,
+    [Itm Cd],
+    SKU,
+    '50' AS PymtAmt,
+    'ChargedUp Spiff Payment' AS PymtType,
+    '81' AS [Patch Code],
+    [SO Ref],
+    [Customer Address],
+    [Postal Cd],
+    0 AS keep
+FROM [pbi].[mi_new_wh_weekly_new_test]
+WHERE 
+    [Operations Group] IN ('CA', 'ELECTR', 'HIM', 'PLUMB')
+    AND [Job Title] IN ('Cleaner', 'Helpers', 'HIM', 'Installers', 'Service Technician')
+    AND SUBSTRING([Login Name Ref], LEN([Login Name Ref]), 1) NOT IN ('5', '9')
